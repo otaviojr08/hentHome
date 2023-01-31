@@ -54,13 +54,13 @@ EmployeeSchema.methods.isRegistered = async function(id: string | null, email: s
   let result = null
 
   if(id && !email)
-    result = await model('Employee').find({ id });
+    result = await model('Employee').find({ _id: id });
   else if(!id && email)
     result = await model('Employee').find({ email });
   else
     throw { message: 'Invalid param', status: 500 }
-
-  if(result.length)
+  
+  if(result && result.length)
     return true
   
   return false
