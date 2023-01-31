@@ -25,4 +25,4 @@ const ContractSchema = new Schema({
   timestamps: true
 })
 
-export const Client: Model<ContractModel> = model<ContractModel>('Contract', ContractSchema)
+export const Contract: Model<ContractModel> = model<ContractModel>('Contract', ContractSchema)

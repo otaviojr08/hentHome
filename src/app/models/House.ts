@@ -21,4 +21,4 @@ const HouseSchema = new Schema({
   timestamps: true
 })
 
-export const Client: Model<HouseModel> = model<HouseModel>('House', HouseSchema)
+export const House: Model<HouseModel> = model<HouseModel>('House', HouseSchema)
