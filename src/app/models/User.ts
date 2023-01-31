@@ -11,17 +11,21 @@ const UserSchema = new Schema({
     required: true
   },
   firstName: {
-    type: String
+    type: String,
+    required: true
   },
   lastName: {
-    type: String
+    type: String,
+    required: true
   }
 }, {
+  methods: {
+    fullName() {
+      return `${this.firstName?.trim()} ${this.lastName?.trim()}`;
+    }
+  },
   timestamps: true
-})
-
-UserSchema.methods.fullName = function (): string {
-  return (this.firstName.trim() + ' ' + this.lastName.trim())
-}
+},
+)
 
 export const User: Model<UserModel> = model<UserModel>('User', UserSchema)
