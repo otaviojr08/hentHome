@@ -76,7 +76,7 @@ export class ClientController implements Controller {
       const { id } = req.params
 
       if(!await clientObj.isRegistered(id, null))
-        throw { message: 'employee not found', status: 404 }
+        throw { message: 'client not found', status: 404 }
       
       await clientObj.deleteClientById(id)
 
