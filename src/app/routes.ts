@@ -3,11 +3,13 @@ import UserController from './controllers/UserController'
 import { EmployeeController } from './controllers/EmployeeController'
 import { ClientController } from './controllers/ClientController'
 import { HouseController } from './controllers/HouseController'
+import { ContractController } from './controllers/ContractController'
 
 const routes = Router()
 const Employee = EmployeeController.getInstance()
 const Client = ClientController.getInstance()
 const House = HouseController.getInstance()
+const Contract = ContractController.getInstance()
 
 // users
 routes.get('/users', UserController.index)
@@ -30,5 +32,11 @@ routes.post('/house/create', House.createElement)
 routes.get('/house/read', House.readElement)
 routes.put('/house/:id/update', House.updateElement)
 routes.delete('/house/:id/delete', House.deleteElement)
+
+// contract
+routes.post('/contract/create', Contract.createElement)
+routes.get('/contract/read', Contract.readElement)
+routes.put('/contract/:id/update', Contract.updateElement)
+routes.delete('/contract/:id/delete', Contract.deleteElement)
 
 export default routes
