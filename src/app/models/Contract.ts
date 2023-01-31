@@ -13,7 +13,7 @@ const ContractSchema = new Schema({
     type: String,
     required: true
   },
-  idImmo: {
+  idHouse: {
     type: String,
     required: true
   },

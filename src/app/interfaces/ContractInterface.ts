@@ -1,6 +1,6 @@
 export interface ContractInterface {
   idCont: string,
   idCli: String,
-  idImmo: string,
+  idHouse: string,
   expiration: Date
 }
