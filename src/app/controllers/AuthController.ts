@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 import { Employee } from '../models/Employee'
+import jwt from 'jsonwebtoken'
+import authConfig from '../../config/authConfig'
 
 export class AuthController {
   private static _instance: AuthController | null = null
@@ -27,8 +29,12 @@ export class AuthController {
 
       if(!isLogged)
         return res.status(401).json('OK')
-    
-      return res.json('OK');
+
+      return res.json({
+        token: jwt.sign({email}, authConfig.secret, {
+          expiresIn: 86400, //1d
+        })
+      })
     } catch(err: any) {
       if(!err.hasOwnProperty('status')){
         err = {message: err, status: 500}
