@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import UserController from './controllers/UserController'
 import { EmployeeController } from './controllers/EmployeeController'
 import { ClientController } from './controllers/ClientController'
 import { HouseController } from './controllers/HouseController'
@@ -10,10 +9,6 @@ const Employee = EmployeeController.getInstance()
 const Client = ClientController.getInstance()
 const House = HouseController.getInstance()
 const Contract = ContractController.getInstance()
-
-// users
-routes.get('/users', UserController.index)
-routes.post('/users', UserController.store)
 
 // employees
 routes.post('/employee/create', Employee.createElement)
