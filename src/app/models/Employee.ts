@@ -5,8 +5,9 @@ export interface EmployeeModel extends EmployeeInterface, Document {
   create(employee: any): Promise<any>,
   isRegistered(id: string | null, email: string | null): Promise<boolean>,
   getAllEmployees(): Promise<any>,
-  updateEmployeeById(id: string, employee: any): Promise<any>
-  deleteEmployeeById(id: string): Promise<any>
+  updateEmployeeById(id: string, employee: any): Promise<any>,
+  deleteEmployeeById(id: string): Promise<any>,
+  auth(email: string, password: string): Promise<any>
 }
 
 const EmployeeSchema = new Schema({
@@ -79,6 +80,17 @@ EmployeeSchema.methods.updateEmployeeById = async function(id: string, employee:
 EmployeeSchema.methods.deleteEmployeeById = async function(id: string): Promise<any>{
   const result = await model('Employee').findByIdAndDelete(id);
   return result
+};
+
+EmployeeSchema.methods.auth = async function(email: string, password: string): Promise<any>{
+  const employee = await model('Employee').findOne({email}).select(
+    "+password"
+  )
+
+  if(password === employee.password)
+    return true 
+
+  return false
 };
 
 export const Employee: Model<EmployeeModel> = model<EmployeeModel>('Employee', EmployeeSchema)

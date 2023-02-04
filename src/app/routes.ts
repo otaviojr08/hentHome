@@ -3,12 +3,14 @@ import { EmployeeController } from './controllers/EmployeeController'
 import { ClientController } from './controllers/ClientController'
 import { HouseController } from './controllers/HouseController'
 import { ContractController } from './controllers/ContractController'
+import { AuthController } from './controllers/AuthController'
 
 const routes = Router()
 const Employee = EmployeeController.getInstance()
 const Client = ClientController.getInstance()
 const House = HouseController.getInstance()
 const Contract = ContractController.getInstance()
+const Auth = AuthController.getInstance()
 
 // employees
 routes.post('/employee/create', Employee.createElement)
@@ -33,5 +35,8 @@ routes.post('/contract/create', Contract.createElement)
 routes.get('/contract/read', Contract.readElement)
 routes.put('/contract/:id/update', Contract.updateElement)
 routes.delete('/contract/:id/delete', Contract.deleteElement)
+
+// auth
+routes.post('/auth', Auth.login)
 
 export default routes
