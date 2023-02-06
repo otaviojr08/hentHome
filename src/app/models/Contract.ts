@@ -12,20 +12,26 @@ export interface ContractModel extends ContractInterface, Document {
 const ContractSchema = new Schema({
   idCont: {
     type: String,
+  },
+  client: {
+    type: Schema.Types.ObjectId,
+    ref: 'Client',
     required: true
   },
-  idCli: {
-    type: String,
+  house: {
+    type: Schema.Types.ObjectId,
+    ref: 'House',
     required: true
   },
-  idHouse: {
-    type: String,
+  start: {
+    type: Date,
+    default: Date.now,
     required: true
   },
   expiration: {
     type: Date,
     required: true
-  }
+  }, 
 }, {
   timestamps: true
 })
@@ -52,7 +58,7 @@ ContractSchema.methods.isRegistered = async function(id: string | null, email: s
 };
 
 ContractSchema.methods.getAllContracts = async function(): Promise<any>{
-  const result = await model('Contract').find();
+  const result = await model('Contract').find().populate('house').populate('client');  
   return result
 };
 
