@@ -33,6 +33,8 @@ routes.delete('/house/:id/delete', House.deleteElement)
 // contract
 routes.post('/contract/create', Contract.createElement)
 routes.get('/contract/read', Contract.readElement)
+routes.get('/contract/:houseId/client/list', Contract.getClientList)
+routes.get('/contract/:clientId/house/list', Contract.getHouseList)
 routes.put('/contract/:id/update', Contract.updateElement)
 routes.delete('/contract/:id/delete', Contract.deleteElement)
 
