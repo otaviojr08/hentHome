@@ -32,6 +32,38 @@ export class ContractController implements Controller {
     }
   }
 
+  public async getClientList(req: Request, res: Response): Promise<Response> {
+    try { 
+      const contractObj = new Contract()
+      const { houseId } = req.params
+      const result = await contractObj.getClientList(houseId)
+
+      return res.json(result)
+    } catch(err: any) {
+      if(!err.hasOwnProperty('status')){
+        err = {message: err, status: 500}
+      }
+      console.error(err.message)
+      return res.status(err.status).json('OK')
+    }
+  }
+
+  public async getHouseList(req: Request, res: Response): Promise<Response> {
+    try { 
+      const contractObj = new Contract()
+      const { clientId } = req.params
+      const result = await contractObj.getHouseList(clientId)
+
+      return res.json(result)
+    } catch(err: any) {
+      if(!err.hasOwnProperty('status')){
+        err = {message: err, status: 500}
+      }
+      console.error(err.message)
+      return res.status(err.status).json('OK')
+    }
+  }
+
   public async readElement(req: Request, res: Response): Promise<Response> {
     try { 
       const contractObj = new Contract()

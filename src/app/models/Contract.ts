@@ -1,12 +1,15 @@
 import { Document, Schema, Model, model } from 'mongoose'
 import { ContractInterface } from '../interfaces/ContractInterface'
+import { House } from './House'
 
 export interface ContractModel extends ContractInterface, Document {
   create(contract: any): Promise<any>,
   isRegistered(id: string | null, email: string | null): Promise<boolean>,
   getAllContracts(): Promise<any>,
-  updateContractById(id: string, contract: any): Promise<any>
-  deleteContractById(id: string): Promise<any>
+  updateContractById(id: string, contract: any): Promise<any>,
+  deleteContractById(id: string): Promise<any>,
+  getClientList(id: string): Promise<any>,
+  getHouseList(clientId: string): Promise<any>
 }
 
 const ContractSchema = new Schema({
@@ -69,6 +72,29 @@ ContractSchema.methods.updateContractById = async function(id: string, contract:
 
 ContractSchema.methods.deleteContractById = async function(id: string): Promise<any>{
   const result = await model('Contract').findByIdAndDelete(id);
+  return result
+};
+
+ContractSchema.methods.getClientList = async function(houseId: string): Promise<any>{
+  const contracts = await model('Contract').find().populate('house').populate('client');    
+  const result = contracts.filter(c => {
+    if(c.house){
+      if(c.house._id.toHexString() == houseId)
+        return c
+    }
+  }) 
+  return result
+};
+
+ContractSchema.methods.getHouseList = async function(clientId: string): Promise<any>{
+  const contracts = await model('Contract').find().populate('house').populate('client'); 
+    
+  const result = contracts.filter(c => {
+    if(c.client){      
+      if(c.client._id.toHexString() == clientId)
+        return c
+    }
+  }) 
   return result
 };
 
