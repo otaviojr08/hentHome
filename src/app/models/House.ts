@@ -11,8 +11,7 @@ export interface HouseModel extends HouseInterface, Document {
 
 const HouseSchema = new Schema({
   idHouse: {
-    type: String,
-    required: true
+    type: String
   },
   address: {
     type: String,

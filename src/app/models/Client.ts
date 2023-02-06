@@ -22,13 +22,16 @@ const ClientSchema = new Schema({
     type: String,
     required: true
   },
-  idCli: {
+  email: {
     type: String,
     required: true
   },
-  creditCard: {
+  phone: {
     type: String,
     required: true
+  },
+  idCli: {
+    type: String,
   }
 }, {
   timestamps: true

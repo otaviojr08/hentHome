@@ -33,7 +33,8 @@ export class AuthController {
       return res.json({
         token: jwt.sign({email}, authConfig.secret, {
           expiresIn: 86400, //1d
-        })
+        }),
+        isAdmin: false
       })
     } catch(err: any) {
       if(!err.hasOwnProperty('status')){

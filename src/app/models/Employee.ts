@@ -28,14 +28,16 @@ const EmployeeSchema = new Schema({
     required: true,
     lowercase: true
   },
+  phone: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true,
-    select: false
   },
   idEmp: {
     type: String,
-    required: true
   },
   isAdmin: {
     type: Boolean,

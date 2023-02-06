@@ -1,7 +1,7 @@
 export interface PersonInterface {
   name: string,
   birthday: Date,
-  cpf: string,
+  cpf: string,  
   email: string,
-  password: string
+  phone: string
 }
