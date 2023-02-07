@@ -30,11 +30,13 @@ export class AuthController {
       if(!isLogged)
         return res.status(401).json('OK')
 
+      const isAdmin = await employeeObj.isAdministrator(email)
+      
       return res.json({
         token: jwt.sign({email}, authConfig.secret, {
           expiresIn: 86400, //1d
         }),
-        isAdmin: false
+        isAdmin
       })
     } catch(err: any) {
       if(!err.hasOwnProperty('status')){

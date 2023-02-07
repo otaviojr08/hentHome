@@ -7,7 +7,8 @@ export interface EmployeeModel extends EmployeeInterface, Document {
   getAllEmployees(): Promise<any>,
   updateEmployeeById(id: string, employee: any): Promise<any>,
   deleteEmployeeById(id: string): Promise<any>,
-  auth(email: string, password: string): Promise<any>
+  auth(email: string, password: string): Promise<any>,
+  isAdministrator(email: string): Promise<any>
 }
 
 const EmployeeSchema = new Schema({
@@ -93,6 +94,13 @@ EmployeeSchema.methods.auth = async function(email: string, password: string): P
     return true 
 
   return false
+};
+
+EmployeeSchema.methods.isAdministrator = async function(email: string): Promise<any>{
+  const result = await model('Employee').find({email});
+  // console.log(result);
+  
+  return result[0].isAdmin
 };
 
 export const Employee: Model<EmployeeModel> = model<EmployeeModel>('Employee', EmployeeSchema)
