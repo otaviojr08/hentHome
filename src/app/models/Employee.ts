@@ -97,10 +97,23 @@ EmployeeSchema.methods.auth = async function(email: string, password: string): P
 };
 
 EmployeeSchema.methods.isAdministrator = async function(email: string): Promise<any>{
-  const result = await model('Employee').find({email});
-  // console.log(result);
-  
+  const result = await model('Employee').find({email});  
   return result[0].isAdmin
 };
 
 export const Employee: Model<EmployeeModel> = model<EmployeeModel>('Employee', EmployeeSchema)
+
+// Create default admin
+Employee.findOne({ email: "admin@teste.com" }).then((res) => {
+  if (!res) {
+    Employee.create({
+      name: "Admin",
+      birthday: "01-01-2023",
+      cpf: "000000000-00",
+      email: "admin@admin",
+      phone: "000000000",
+      password: "123456",
+      isAdmin: true,
+    })
+  }
+})
