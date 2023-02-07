@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 
-export interface Controller {
-  createElement(req: Request, res: Response): Promise<Response>
-  readElement(req: Request, res: Response): Promise<Response> 
-  updateElement(req: Request, res: Response): Promise<Response> 
-  deleteElement(req: Request, res: Response): Promise<Response> 
+export abstract class Controller {
+  public abstract createElement(req: Request, res: Response): Promise<Response>
+  public abstract readElement(req: Request, res: Response): Promise<Response> 
+  public abstract updateElement(req: Request, res: Response): Promise<Response> 
+  public abstract deleteElement(req: Request, res: Response): Promise<Response> 
 }

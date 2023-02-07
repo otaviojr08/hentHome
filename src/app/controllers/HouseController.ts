@@ -2,10 +2,11 @@ import { Request, Response } from 'express'
 import { House } from '../models/House'
 import { Controller } from './Controller'
 
-export class HouseController implements Controller {
+export class HouseController extends Controller {
   private static _instance: HouseController | null = null
   
   private constructor(){
+    super()
   }
 
   public static getInstance(): HouseController {

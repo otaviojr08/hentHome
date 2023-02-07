@@ -2,10 +2,11 @@ import { Request, Response } from 'express'
 import { Contract } from '../models/Contract'
 import { Controller } from './Controller'
 
-export class ContractController implements Controller {
+export class ContractController extends Controller {
   private static _instance: ContractController | null = null
   
   private constructor(){
+    super()
   }
 
   public static getInstance(): ContractController {

@@ -2,10 +2,11 @@ import { Request, Response } from 'express'
 import { Client } from '../models/Client'
 import { Controller } from './Controller'
 
-export class ClientController implements Controller {
+export class ClientController extends Controller {
   private static _instance: ClientController | null = null
   
   private constructor(){
+    super()
   }
 
   public static getInstance(): ClientController {
