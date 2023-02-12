@@ -23,7 +23,7 @@ export class AuthController {
       const { email, password } = req.body;
 
       if(!await employeeObj.isRegistered(null, email))
-        throw { message: 'email not found in database', status: 400 }
+        throw { message: 'email not found in database', status: 404 }
       
       const isLogged = await employeeObj.auth(email, password);
 
